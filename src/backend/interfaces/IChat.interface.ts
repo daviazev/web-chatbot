@@ -3,10 +3,10 @@ export default interface IChat {
   userId?: string;
   conversation: [
     {
-      text: string,
-      createdAt: Date,
-      chatBotText: boolean
+      text: string;
+      createdAt: Date;
+      chatBotText: boolean;
     }
   ];
-  createdAt: Date
+  createdAt: Date;
 }
