@@ -15,6 +15,11 @@ abstract class AbstractODM<T> {
     const newDoc = await this.model.create({ ...obj });
     return newDoc;
   }
+
+  public async getConversationsByUserId(userId: string): Promise<T[]> {
+    const allDocs = await this.model.find({ userId });
+    return allDocs;
+  }
 }
 
 export default AbstractODM;

@@ -21,8 +21,21 @@ class ChatController {
       const response = await this.service.postChatConversation(body);
       return this.res.status(HttpStatus.CREATED).json({ response });
     } catch (error) {
-      console.log(error);
+      return this.res
+        .status(HttpStatus.INTERNAL_ERROR)
+        .json({ message: ErrorMessages.INTERNAL_ERROR });
+    }
+  }
 
+  public async getConversationsByUserId() {
+    const { userId } = this.req.query;
+
+    try {
+      const response = await this.service.getConversationsByUserId(
+        userId as string
+      );
+      return this.res.status(HttpStatus.OK).json({ response });
+    } catch (error) {
       return this.res
         .status(HttpStatus.INTERNAL_ERROR)
         .json({ message: ErrorMessages.INTERNAL_ERROR });

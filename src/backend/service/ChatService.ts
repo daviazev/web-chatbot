@@ -12,6 +12,11 @@ class ChatService {
     const newConversation = await this.model.create({ ...chat });
     return newConversation;
   }
+
+  public async getConversationsByUserId(id: string) {
+    const allConversations = await this.model.getConversationsByUserId(id);
+    return allConversations;
+  }
 }
 
 export default ChatService;
