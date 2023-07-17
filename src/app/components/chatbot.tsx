@@ -13,13 +13,9 @@ export default function ChatBot() {
   const [conversations, setConversations] = useState<Message[]>([]);
 
   const formatDate = (date: Date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = String(date.getFullYear());
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-
-    return `${day}-${month}-${year} ${hours}:${minutes}`;
+    const horas = String(date.getHours()).padStart(2, "0");
+    const minutos = String(date.getMinutes()).padStart(2, "0");
+    return `${horas}:${minutos}`;
   };
 
   const handlerMessage = (text: string): void => {
@@ -34,6 +30,7 @@ export default function ChatBot() {
     };
 
     setConversations([...conversations, addMessage]);
+    setText("")
   };
 
   return (
@@ -51,7 +48,9 @@ export default function ChatBot() {
               }
             >
               <span>{text}</span>
-              <span>{formatDate(createdAt)}</span>
+              <span className={styles["msg-time"]}>
+                {formatDate(createdAt)}
+              </span>
             </div>
           </div>
         ))}
@@ -61,6 +60,7 @@ export default function ChatBot() {
           onChange={({ target }) => handlerMessage(target.value)}
           className={styles.input}
           placeholder="type something"
+          value={text}
         ></input>
         <button onClick={() => sendMessage()} className={styles["send-btn"]}>
           SEND
