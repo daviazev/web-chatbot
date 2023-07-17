@@ -1,43 +1,116 @@
 "use client";
 import styles from "./chatbot.module.css";
-import React, { useState } from "react";
-
-type Message = {
-  text: string;
-  createdAt: Date;
-  chatBotText: boolean;
-};
+import React, { useEffect, useState } from "react";
+import formatDate from "@/app/utils/formatDate";
+import initialMessages from "@/app/utils/chatbotMessages";
+import Message from "@/app/interfaces/message";
 
 export default function ChatBot() {
   const [text, setText] = useState("");
   const [conversations, setConversations] = useState<Message[]>([]);
+  const [call, setCall] = useState(0);
+  const [call2, setCal2] = useState(0);
+  const [isPassword, setisPassword] = useState(false);
 
-  const formatDate = (date: Date) => {
-    const horas = String(date.getHours()).padStart(2, "0");
-    const minutos = String(date.getMinutes()).padStart(2, "0");
-    return `${horas}:${minutos}`;
-  };
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
-  const handlerMessage = (text: string): void => {
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const userId = localStorage.getItem("userId");
+
+    if (username && userId) {
+      const welcomeMessage = {
+        text: initialMessages.WELCOME,
+        createdAt: new Date(),
+        chatBotText: true,
+      };
+
+      setConversations((prevConversations) => [
+        ...prevConversations,
+        welcomeMessage,
+      ]);
+    }
+  }, [localStorage.getItem("username"), localStorage.getItem("userId")]);
+
+  const handlerMessage = (text: string) => {
     setText(text);
   };
 
-  const sendMessage = (): void => {
+  const handlerUsername = () => {
+    if (call === 0) {
+      const nonUsernameMessage = {
+        text: initialMessages.NOT_LOGGED,
+        createdAt: new Date(),
+        chatBotText: true,
+      };
+
+      setConversations((prevConversations) => [
+        ...prevConversations,
+        nonUsernameMessage,
+      ]);
+
+      setCall((prev) => prev + 1);
+    } else {
+      localStorage.setItem("username", text);
+      credentialsListener();
+      setisPassword(true);
+    }
+  };
+
+  const handlerUserId = () => {
+    if (call2 === 0) {
+      const nonUserIdMessage = {
+        text: initialMessages.NEED_PASSWORD,
+        createdAt: new Date(),
+        chatBotText: true,
+      };
+
+      setConversations((prevConversations) => [
+        ...prevConversations,
+        nonUserIdMessage,
+      ]);
+
+      setCal2((prev) => prev + 1);
+    } else {
+      localStorage.setItem("userId", "322342");
+      setisPassword(false);
+    }
+  };
+
+  const handleDefault = () => {
     const addMessage: Message = {
       text,
       createdAt: new Date(),
       chatBotText: false,
     };
 
-    setConversations([...conversations, addMessage]);
-    setText("")
+    setConversations((prevConversations) => [...prevConversations, addMessage]);
+  };
+
+  const credentialsListener = () => {
+    const username = localStorage.getItem("username");
+    const userId = localStorage.getItem("userId");
+
+    if (!username) {
+      handleDefault();
+      handlerUsername();
+    } else if (!userId) {
+      handlerUserId();
+    } else {
+      handleDefault();
+    }
+
+    setText("");
   };
 
   return (
     <main className={styles.main}>
       <div className={styles["chat-wrapper"]}>
-        {conversations.map(({ text, createdAt, chatBotText }) => (
+        {conversations.map(({ text, createdAt, chatBotText }, index) => (
           <div
+            key={index}
             className={
               chatBotText ? styles["msg-to-left"] : styles["msg-to-right"]
             }
@@ -58,11 +131,14 @@ export default function ChatBot() {
       <div className={styles["message-field"]}>
         <input
           onChange={({ target }) => handlerMessage(target.value)}
-          className={styles.input}
-          placeholder="type something"
           value={text}
-        ></input>
-        <button onClick={() => sendMessage()} className={styles["send-btn"]}>
+          className={styles["input"]}
+          type={isPassword ? "password" : "text"}
+        />
+        <button
+          onClick={() => credentialsListener()}
+          className={styles["send-btn"]}
+        >
           SEND
         </button>
       </div>
