@@ -4,4 +4,22 @@ const initialMessages = {
   WELCOME: "Great! You are all set up! Welcome!",
 };
 
-export default initialMessages;
+const nonUsernameMessage = {
+  text: initialMessages.NOT_LOGGED,
+  createdAt: new Date(),
+  chatBotText: true,
+};
+
+const welcomeMessage = {
+  text: initialMessages.WELCOME,
+  createdAt: new Date(),
+  chatBotText: true,
+};
+
+const nonUserIdMessage = {
+  text: initialMessages.NEED_PASSWORD,
+  createdAt: new Date(),
+  chatBotText: true,
+};
+
+export { nonUsernameMessage, nonUserIdMessage, welcomeMessage };

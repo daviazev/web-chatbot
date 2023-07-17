@@ -1,7 +1,11 @@
 "use client";
 import styles from "./chatbot.module.css";
 import React, { useEffect, useState } from "react";
-import initialMessages from "@/app/utils/chatbotMessages";
+import {
+  nonUsernameMessage,
+  nonUserIdMessage,
+  welcomeMessage,
+} from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
 
@@ -17,16 +21,10 @@ export default function ChatBot() {
   }, []);
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    const userId = localStorage.getItem("userId");
+    const isUsernameDefined = localStorage.getItem("username");
+    const isUserIdDefined = localStorage.getItem("userId");
 
-    if (username && userId) {
-      const welcomeMessage = {
-        text: initialMessages.WELCOME,
-        createdAt: new Date(),
-        chatBotText: true,
-      };
-
+    if (isUsernameDefined && isUserIdDefined) {
       setConversations((prevConversations) => [
         ...prevConversations,
         welcomeMessage,
@@ -38,19 +36,16 @@ export default function ChatBot() {
     setText(text);
   };
 
+  const conversationsHandler = (message: IMessage) => {
+    setConversations((prevConversations) => [
+      ...prevConversations,
+      message,
+    ]);
+  }
+
   const handlerUsername = () => {
     if (call === 0) {
-      const nonUsernameMessage = {
-        text: initialMessages.NOT_LOGGED,
-        createdAt: new Date(),
-        chatBotText: true,
-      };
-
-      setConversations((prevConversations) => [
-        ...prevConversations,
-        nonUsernameMessage,
-      ]);
-
+      conversationsHandler(nonUsernameMessage)
       setCall((prev) => prev + 1);
     } else {
       localStorage.setItem("username", text);
@@ -61,17 +56,7 @@ export default function ChatBot() {
 
   const handlerUserId = () => {
     if (call2 === 0) {
-      const nonUserIdMessage = {
-        text: initialMessages.NEED_PASSWORD,
-        createdAt: new Date(),
-        chatBotText: true,
-      };
-
-      setConversations((prevConversations) => [
-        ...prevConversations,
-        nonUserIdMessage,
-      ]);
-
+      conversationsHandler(nonUserIdMessage)
       setCal2((prev) => prev + 1);
     } else {
       localStorage.setItem("userId", "322342");
@@ -80,13 +65,13 @@ export default function ChatBot() {
   };
 
   const handleDefault = () => {
-    const addMessage: IMessage = {
+    const newMessage: IMessage = {
       text,
       createdAt: new Date(),
       chatBotText: false,
     };
 
-    setConversations((prevConversations) => [...prevConversations, addMessage]);
+    conversationsHandler(newMessage)
   };
 
   const credentialsListener = () => {
