@@ -69,4 +69,19 @@ const loanMessages: IMessage[] = [
   },
 ];
 
-export { nonUsernameMessage, nonUserIdMessage, welcomeMessage, loanMessages };
+const loginErrorMessage: IMessage = {
+  text: "Username or password is incorrect. Try again!",
+  createdAt: new Date(),
+  chatBotText: true,
+  isALink: false,
+  isAButton: false,
+  link: "",
+};
+
+export {
+  nonUsernameMessage,
+  nonUserIdMessage,
+  welcomeMessage,
+  loanMessages,
+  loginErrorMessage,
+};

@@ -8,18 +8,25 @@
 }
 
 .message-field {
+  /* background-color: red; */
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 8px 0px;
+  margin-top: 8px;
 }
 
 .input {
+  border: 1px solid;
+  border-radius: 16px;
   padding: 12px;
+  width: 75%;
 }
 
 .send-btn {
+  border-radius: 16px;
   background-color: blue;
-  width: 24%;
+  width: 20%;
   border: none;
   color: white;
 }
@@ -30,10 +37,3 @@
   flex-direction: column;
   gap: 4px;
 }
-
-/* .loan-options {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1000px;
-} */

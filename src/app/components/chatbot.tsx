@@ -6,6 +6,7 @@ import {
   nonUserIdMessage,
   welcomeMessage,
   loanMessages,
+  loginErrorMessage,
 } from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
@@ -15,9 +16,10 @@ export default function ChatBot() {
   const [text, setText] = useState("");
   const [conversations, setConversations] = useState<IMessage[]>([]);
   const [call, setCall] = useState(0);
-  const [call2, setCal2] = useState(0);
+  const [call2, setCall2] = useState(0);
   const [isPassword, setisPassword] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
+  const [firstCall, setFirstCall] = useState(true);
 
   useEffect(() => {
     localStorage.clear();
@@ -29,16 +31,25 @@ export default function ChatBot() {
 
     const handleLogin = async () => {
       const { data } = await api.post("api/login", { ...user });
-      localStorage.setItem("userId", data._id);
-      localStorage.setItem("username", data.username);
+      return data;
     };
 
-    if (isUsernameDefined && isUserIdDefined) {
-      handleLogin();
-      setConversations((prevConversations) => [
-        ...prevConversations,
-        welcomeMessage,
-      ]);
+    if (isUsernameDefined && isUserIdDefined && firstCall) {
+      handleLogin()
+        .then((response) => {
+          localStorage.setItem("userId", response._id);
+          localStorage.setItem("username", response.username);
+          conversationsHandler(welcomeMessage);
+        })
+        .catch((error) => {
+          console.log("deu erro", error);
+          conversationsHandler(loginErrorMessage);
+          localStorage.clear();
+          setCall(0)
+          setCall2(0)
+        });
+
+      setFirstCall(false);
     }
   }, [localStorage.getItem("username"), localStorage.getItem("userId")]);
 
@@ -68,7 +79,7 @@ export default function ChatBot() {
   const handlerUserId = () => {
     if (call2 === 0) {
       conversationsHandler(nonUserIdMessage);
-      setCal2((prev) => prev + 1);
+      setCall2((prev) => prev + 1);
     } else {
       localStorage.setItem("userId", "322342");
       credentialsListener();
@@ -77,6 +88,7 @@ export default function ChatBot() {
         password: text,
       }));
       setisPassword(false);
+      setFirstCall(true)
     }
   };
 
@@ -122,22 +134,26 @@ export default function ChatBot() {
   return (
     <div className={styles.main}>
       <div className={styles["chat-wrapper"]}>
-        {conversations.map(
-          (
-            { text, createdAt, chatBotText, isALink, link, isAButton },
-            index
-          ) => (
-            <Message
-              key={index}
-              text={text}
-              createdAt={createdAt}
-              chatBotText={chatBotText}
-              isALink={isALink}
-              link={link}
-              conversationsHandler={conversationsHandler}
-              isAbutton={isAButton}
-            />
+        {conversations.length > 0 ? (
+          conversations.map(
+            (
+              { text, createdAt, chatBotText, isALink, link, isAButton },
+              index
+            ) => (
+              <Message
+                key={index}
+                text={text}
+                createdAt={createdAt}
+                chatBotText={chatBotText}
+                isALink={isALink}
+                link={link}
+                conversationsHandler={conversationsHandler}
+                isAbutton={isAButton}
+              />
+            )
           )
+        ) : (
+          <h2>Hi, type something!</h2>
         )}
       </div>
       <div className={styles["message-field"]}>
@@ -146,6 +162,7 @@ export default function ChatBot() {
           value={text}
           className={styles["input"]}
           type={isPassword ? "password" : "text"}
+          placeholder="Aa"
         />
         <button
           onClick={() => credentialsListener()}
