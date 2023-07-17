@@ -8,6 +8,7 @@ import {
 } from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
+import api from "@/axios/config";
 
 export default function ChatBot() {
   const [text, setText] = useState("");
@@ -15,6 +16,7 @@ export default function ChatBot() {
   const [call, setCall] = useState(0);
   const [call2, setCal2] = useState(0);
   const [isPassword, setisPassword] = useState(false);
+  const [user, setUser] = useState({ username: "", password: "" });
 
   useEffect(() => {
     localStorage.clear();
@@ -24,7 +26,14 @@ export default function ChatBot() {
     const isUsernameDefined = localStorage.getItem("username");
     const isUserIdDefined = localStorage.getItem("userId");
 
+    const handleLogin = async () => {
+      const { data } = await api.post("api/login", { ...user });
+      localStorage.setItem("userId", data._id);
+      localStorage.setItem("username", data.username);
+    };
+
     if (isUsernameDefined && isUserIdDefined) {
+      handleLogin();
       setConversations((prevConversations) => [
         ...prevConversations,
         welcomeMessage,
@@ -37,18 +46,19 @@ export default function ChatBot() {
   };
 
   const conversationsHandler = (message: IMessage) => {
-    setConversations((prevConversations) => [
-      ...prevConversations,
-      message,
-    ]);
-  }
+    setConversations((prevConversations) => [...prevConversations, message]);
+  };
 
   const handlerUsername = () => {
     if (call === 0) {
-      conversationsHandler(nonUsernameMessage)
+      conversationsHandler(nonUsernameMessage);
       setCall((prev) => prev + 1);
     } else {
       localStorage.setItem("username", text);
+      setUser((prev) => ({
+        ...prev,
+        username: text,
+      }));
       credentialsListener();
       setisPassword(true);
     }
@@ -56,10 +66,15 @@ export default function ChatBot() {
 
   const handlerUserId = () => {
     if (call2 === 0) {
-      conversationsHandler(nonUserIdMessage)
+      conversationsHandler(nonUserIdMessage);
       setCal2((prev) => prev + 1);
     } else {
       localStorage.setItem("userId", "322342");
+      credentialsListener();
+      setUser((prev) => ({
+        ...prev,
+        password: text,
+      }));
       setisPassword(false);
     }
   };
@@ -71,7 +86,7 @@ export default function ChatBot() {
       chatBotText: false,
     };
 
-    conversationsHandler(newMessage)
+    conversationsHandler(newMessage);
   };
 
   const credentialsListener = () => {
