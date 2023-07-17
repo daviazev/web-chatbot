@@ -3,5 +3,6 @@ export default interface IMessage {
   createdAt: Date;
   chatBotText: boolean;
   isALink: boolean;
-  link: string
+  isAButton: boolean;
+  link: string;
 }

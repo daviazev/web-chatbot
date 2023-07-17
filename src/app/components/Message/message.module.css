@@ -54,3 +54,18 @@
   max-width: 70%;
   margin-right: auto;
 }
+
+.btn-option {
+  background-color: #eaeaea;
+  border: 2px solid #eaeaea;
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 12px;
+}
+
+.btn-option:hover {
+  background-color: #848484;
+  border: 2px solid #848484;
+  color: white;
+}

@@ -11,6 +11,7 @@ const nonUsernameMessage = {
   createdAt: new Date(),
   chatBotText: true,
   isALink: false,
+  isAButton: false,
   link: "",
 };
 
@@ -19,6 +20,7 @@ const welcomeMessage = {
   createdAt: new Date(),
   chatBotText: true,
   isALink: false,
+  isAButton: false,
   link: "",
 };
 
@@ -27,6 +29,8 @@ const nonUserIdMessage = {
   createdAt: new Date(),
   chatBotText: true,
   isALink: false,
+  isAButton: false,
+
   link: "",
 };
 
@@ -36,28 +40,32 @@ const loanMessages: IMessage[] = [
     createdAt: new Date(),
     chatBotText: true,
     isALink: false,
+    isAButton: false,
     link: "",
   },
   {
-    text: "Do you want to apply for a loan?",
+    text: "I want to apply for a loan",
     createdAt: new Date(),
     chatBotText: true,
-    isALink: true,
-    link: "google.com",
+    isALink: false,
+    isAButton: true,
+    link: "",
   },
   {
     text: "Loan conditions",
     createdAt: new Date(),
     chatBotText: true,
-    isALink: true,
-    link: "google.com",
+    isALink: false,
+    isAButton: true,
+    link: "",
   },
   {
     text: "Help",
     createdAt: new Date(),
     chatBotText: true,
-    isALink: true,
-    link: "google.com",
+    isALink: false,
+    isAButton: true,
+    link: "",
   },
 ];
 

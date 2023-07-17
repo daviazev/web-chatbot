@@ -2,25 +2,88 @@
 import React from "react";
 import styles from "./message.module.css";
 import formatDate from "@/app/utils/formatDate";
-import IMessage from "@/app/interfaces/message";
 import clsx from "clsx";
+
+const message1 =
+  "I'm glad to help you! You can read more informations about how to make a loan on the link below";
+const message2 =
+  "I'm glad to help you! You can read more informations about loan conditions on the link below";
+const message3 =
+  "I'm glad to help you! You can read more informations about how to apply for a loan on the link below";
+
+interface IMessageComponent {
+  text: string;
+  createdAt: Date;
+  chatBotText: boolean;
+  isALink: boolean;
+  link: string;
+  isAbutton: boolean;
+  conversationsHandler: Function;
+}
 
 export default function Message({
   chatBotText,
   text,
   createdAt,
   isALink,
+  isAbutton,
   link,
-}: IMessage) {
+  conversationsHandler,
+}: IMessageComponent) {
+  const loanChatBotMessges = (
+    message: string,
+    toggle: boolean,
+    optionLink: string
+  ) => {
+    conversationsHandler({
+      text: message,
+      createdAt: new Date(),
+      chatBotText: true,
+      isALink: toggle,
+      link: optionLink,
+    });
+  };
+
+  const loanOptionsHandler = () => {
+    conversationsHandler({
+      text,
+      createdAt: new Date(),
+      chatBotText: false,
+      isALink: false,
+      link: "",
+    });
+
+    if (text === "Help") {
+      loanChatBotMessges(message1, false, "");
+      loanChatBotMessges("How to make a loan", true, "google.com");
+    } else if (text === "Loan Conditions") {
+      loanChatBotMessges(message2, false, "");
+      loanChatBotMessges("How to make a loan", true, "google.com");
+    } else {
+      loanChatBotMessges(message3, false, "");
+      loanChatBotMessges("How to make a loan", true, "google.com");
+    }
+  };
+
+  if (isAbutton) {
+    return (
+      <div className={clsx(isALink && styles["msg-to-left"])}>
+        <div>
+          <button className={styles["btn-option"]} onClick={() => loanOptionsHandler()} >
+            {text}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (isALink) {
     return (
       <div className={clsx(isALink && styles["msg-to-left"])}>
-        <div
-          className={clsx(
-            chatBotText && styles["chatbot-msg"]
-          )}
-        >
-          <a href={link}>{text}</a>
+        <div className={clsx(chatBotText && styles["chatbot-msg"])}>
+          <a onClick={() => loanOptionsHandler()} href={link} target="_blank">
+            {text}
+          </a>
         </div>
       </div>
     );

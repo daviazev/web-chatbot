@@ -86,6 +86,7 @@ export default function ChatBot() {
       createdAt: new Date(),
       chatBotText: false,
       isALink: false,
+      isAButton: false,
       link: "",
     };
 
@@ -122,7 +123,10 @@ export default function ChatBot() {
     <div className={styles.main}>
       <div className={styles["chat-wrapper"]}>
         {conversations.map(
-          ({ text, createdAt, chatBotText, isALink, link }, index) => (
+          (
+            { text, createdAt, chatBotText, isALink, link, isAButton },
+            index
+          ) => (
             <Message
               key={index}
               text={text}
@@ -130,6 +134,8 @@ export default function ChatBot() {
               chatBotText={chatBotText}
               isALink={isALink}
               link={link}
+              conversationsHandler={conversationsHandler}
+              isAbutton={isAButton}
             />
           )
         )}
