@@ -25,30 +25,6 @@
   color: white;
 }
 
-.user-msg {
-  align-items: flex-start;
-  background-color: #0085ff;
-  border: 2px solid #0085ff;
-  border-radius: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  word-wrap: break-word;
-  position: relative;
-}
-
-.chatbot-msg {
-  background-color: #eaeaea;
-  border: 2px solid #eaeaea;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  border-radius: 24px;
-  position: relative;
-}
-
 .chat-wrapper {
   position: relative;
   display: flex;
@@ -56,19 +32,3 @@
   gap: 4px;
 }
 
-.msg-to-right {
-  display: inline-block;
-  max-width: 70%;
-  margin-left: auto;
-}
-
-.msg-to-left {
-  display: inline-block;
-  max-width: 70%;
-  margin-right: auto;
-}
-
-.msg-time {
-  margin-left: auto;
-  font-size: 12px;
-}

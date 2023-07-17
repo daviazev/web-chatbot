@@ -1,13 +1,13 @@
 "use client";
 import styles from "./chatbot.module.css";
 import React, { useEffect, useState } from "react";
-import formatDate from "@/app/utils/formatDate";
 import initialMessages from "@/app/utils/chatbotMessages";
-import Message from "@/app/interfaces/message";
+import IMessage from "@/app/interfaces/message";
+import Message from "./Message";
 
 export default function ChatBot() {
   const [text, setText] = useState("");
-  const [conversations, setConversations] = useState<Message[]>([]);
+  const [conversations, setConversations] = useState<IMessage[]>([]);
   const [call, setCall] = useState(0);
   const [call2, setCal2] = useState(0);
   const [isPassword, setisPassword] = useState(false);
@@ -80,7 +80,7 @@ export default function ChatBot() {
   };
 
   const handleDefault = () => {
-    const addMessage: Message = {
+    const addMessage: IMessage = {
       text,
       createdAt: new Date(),
       chatBotText: false,
@@ -106,26 +106,15 @@ export default function ChatBot() {
   };
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <div className={styles["chat-wrapper"]}>
         {conversations.map(({ text, createdAt, chatBotText }, index) => (
-          <div
+          <Message
             key={index}
-            className={
-              chatBotText ? styles["msg-to-left"] : styles["msg-to-right"]
-            }
-          >
-            <div
-              className={
-                chatBotText ? styles["chatbot-msg"] : styles["user-msg"]
-              }
-            >
-              <span>{text}</span>
-              <span className={styles["msg-time"]}>
-                {formatDate(createdAt)}
-              </span>
-            </div>
-          </div>
+            text={text}
+            createdAt={createdAt}
+            chatBotText={chatBotText}
+          />
         ))}
       </div>
       <div className={styles["message-field"]}>
@@ -142,6 +131,6 @@ export default function ChatBot() {
           SEND
         </button>
       </div>
-    </main>
+    </div>
   );
 }
