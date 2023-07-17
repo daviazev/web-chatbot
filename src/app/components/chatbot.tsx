@@ -5,6 +5,7 @@ import {
   nonUsernameMessage,
   nonUserIdMessage,
   welcomeMessage,
+  loanMessages,
 } from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
@@ -84,9 +85,19 @@ export default function ChatBot() {
       text,
       createdAt: new Date(),
       chatBotText: false,
+      isALink: false,
+      link: "",
     };
 
     conversationsHandler(newMessage);
+  };
+
+  const loanHandler = () => {
+    handleDefault();
+
+    loanMessages.forEach((e) => {
+      conversationsHandler(e);
+    });
   };
 
   const credentialsListener = () => {
@@ -98,6 +109,8 @@ export default function ChatBot() {
       handlerUsername();
     } else if (!userId) {
       handlerUserId();
+    } else if (username && userId && text === "loan") {
+      loanHandler();
     } else {
       handleDefault();
     }
@@ -108,14 +121,18 @@ export default function ChatBot() {
   return (
     <div className={styles.main}>
       <div className={styles["chat-wrapper"]}>
-        {conversations.map(({ text, createdAt, chatBotText }, index) => (
-          <Message
-            key={index}
-            text={text}
-            createdAt={createdAt}
-            chatBotText={chatBotText}
-          />
-        ))}
+        {conversations.map(
+          ({ text, createdAt, chatBotText, isALink, link }, index) => (
+            <Message
+              key={index}
+              text={text}
+              createdAt={createdAt}
+              chatBotText={chatBotText}
+              isALink={isALink}
+              link={link}
+            />
+          )
+        )}
       </div>
       <div className={styles["message-field"]}>
         <input
