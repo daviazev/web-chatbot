@@ -1,0 +1,13 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-item {
+  padding: 14px;
+  color: black;
+}
+
+.navbar-item:hover {
+  background-color: #eaeaea;
+}
