@@ -7,6 +7,7 @@ import {
   welcomeMessage,
   loanMessages,
   loginErrorMessage,
+  goodByeMessage,
 } from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
@@ -45,8 +46,8 @@ export default function ChatBot() {
           console.log("deu erro", error);
           conversationsHandler(loginErrorMessage);
           localStorage.clear();
-          setCall(0)
-          setCall2(0)
+          setCall(0);
+          setCall2(0);
         });
 
       setFirstCall(false);
@@ -88,7 +89,7 @@ export default function ChatBot() {
         password: text,
       }));
       setisPassword(false);
-      setFirstCall(true)
+      setFirstCall(true);
     }
   };
 
@@ -113,6 +114,11 @@ export default function ChatBot() {
     });
   };
 
+  const finishConversation = () => {
+    handleDefault();
+    conversationsHandler(goodByeMessage);
+  };
+
   const credentialsListener = () => {
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId");
@@ -122,8 +128,10 @@ export default function ChatBot() {
       handlerUsername();
     } else if (!userId) {
       handlerUserId();
-    } else if (username && userId && text === "loan") {
+    } else if (username && userId && text.toLocaleLowerCase() === "loan") {
       loanHandler();
+    } else if (username && userId && text.toLocaleLowerCase() === "goodbye") {
+      finishConversation();
     } else {
       handleDefault();
     }

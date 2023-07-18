@@ -69,7 +69,10 @@ export default function Message({
     return (
       <div className={clsx(isALink && styles["msg-to-left"])}>
         <div>
-          <button className={styles["btn-option"]} onClick={() => loanOptionsHandler()} >
+          <button
+            className={styles["btn-option"]}
+            onClick={() => loanOptionsHandler()}
+          >
             {text}
           </button>
         </div>

@@ -78,10 +78,20 @@ const loginErrorMessage: IMessage = {
   link: "",
 };
 
+const goodByeMessage: IMessage = {
+  text: "Goodbye! Have a nice day :)",
+  createdAt: new Date(),
+  chatBotText: true,
+  isALink: false,
+  isAButton: false,
+  link: "",
+};
+
 export {
   nonUsernameMessage,
   nonUserIdMessage,
   welcomeMessage,
   loanMessages,
   loginErrorMessage,
+  goodByeMessage,
 };
