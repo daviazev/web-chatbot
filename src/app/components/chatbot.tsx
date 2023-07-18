@@ -31,7 +31,8 @@ export default function ChatBot() {
 
     const finishConversation = async () => {
       if (
-        conversations.length > 0 && conversations[conversations.length - 1].text === goodByeMessage.text
+        conversations.length > 0 &&
+        conversations[conversations.length - 1].text === goodByeMessage.text
       ) {
         console.log(conversations);
 
@@ -42,10 +43,9 @@ export default function ChatBot() {
 
         console.log(data);
       }
-
     };
-  
-    finishConversation()
+
+    finishConversation();
   }, [conversations]);
 
   useEffect(() => {
@@ -65,7 +65,6 @@ export default function ChatBot() {
           conversationsHandler(welcomeMessage);
         })
         .catch((error) => {
-          console.log("deu erro", error);
           conversationsHandler(loginErrorMessage);
           localStorage.clear();
           setCall(0);
@@ -76,9 +75,7 @@ export default function ChatBot() {
     }
   }, [localStorage.getItem("username"), localStorage.getItem("userId")]);
 
-  const handlerMessage = (text: string) => {
-    setText(text);
-  };
+  const handlerMessage = (text: string) => setText(text);
 
   const conversationsHandler = (message: IMessage) => {
     setConversations((prevConversations) => [...prevConversations, message]);
@@ -90,10 +87,7 @@ export default function ChatBot() {
       setCall((prev) => prev + 1);
     } else {
       localStorage.setItem("username", text);
-      setUser((prev) => ({
-        ...prev,
-        username: text,
-      }));
+      setUser((prev) => ({ ...prev, username: text }));
       credentialsListener();
       setisPassword(true);
     }
@@ -105,11 +99,18 @@ export default function ChatBot() {
       setCall2((prev) => prev + 1);
     } else {
       localStorage.setItem("userId", "1");
-      credentialsListener();
-      setUser((prev) => ({
-        ...prev,
-        password: text,
-      }));
+      setUser((prev) => ({ ...prev, password: text }));
+
+      const messageWithoutPassword = {
+        text: text.replace(/./g, "*"),
+        createdAt: new Date(),
+        isAChatBotText: false,
+        isALink: false,
+        isAButton: false,
+        url: "",
+      };
+
+      conversationsHandler(messageWithoutPassword);
       setisPassword(false);
       setFirstCall(true);
     }
@@ -130,10 +131,7 @@ export default function ChatBot() {
 
   const loanHandler = () => {
     handleDefault();
-
-    loanMessages.forEach((e) => {
-      conversationsHandler(e);
-    });
+    loanMessages.forEach((e) => conversationsHandler(e));
   };
 
   const credentialsListener = () => {
