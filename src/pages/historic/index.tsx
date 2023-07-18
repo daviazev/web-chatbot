@@ -2,6 +2,7 @@
 import Message from "@/app/components/Message";
 import api from "@/axios/config";
 import { useEffect, useState } from "react";
+import styles from "./historic.module.css"
 
 interface IMessage {
   _id: string;
@@ -52,38 +53,38 @@ export default function Historic() {
     getHistoric();
   }, []);
 
-  const conversationsHandler = () => {};
-
   return (
-    <div>
+    <div className={styles.main}>
       <nav>
         <a href="/">Chatbot</a>
         <a href="/historic">Registre-se</a>
       </nav>
       <h1>Histórico de conversas</h1>
-      <div>
+      <div className={styles["chat-wrapper"]}>
         {conversations.length > 0 &&
           conversations.map(({ createdAt, conversation }) => (
-            <div>
+            <div className={styles["msgs-history"]}>
               <h2>
                 conversation user #{localStorage.getItem("username")} -{" "}
                 {formatarData(createdAt)}
               </h2>
               {conversation.map(
                 ({
-                  text,
-                  createdAt,
-                  isAChatBotText,
-                  isALink,
-                  isAButton,
-                  url,
                   _id,
+                  createdAt,
+                  text,
+                  isAChatBotText,
+                  url,
                 }) => (
-                  <div key={_id}>
-                    <span>{text}</span>
-                    <span>{formatarData(createdAt)}</span>
-                    <span>{isAChatBotText}</span>
-                  </div>
+                  <Message
+                    key={_id}
+                    createdAt={new Date(createdAt)}
+                    text={text}
+                    isALink={false}
+                    isAbutton={false}
+                    chatBotText={isAChatBotText}
+                    link={url}
+                  />
                 )
               )}
             </div>

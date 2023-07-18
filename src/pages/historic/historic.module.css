@@ -1,0 +1,11 @@
+.chat-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.msgs-history {
+  display: flex;
+  flex-direction: column;
+}

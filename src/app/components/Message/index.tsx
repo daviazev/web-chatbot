@@ -11,14 +11,14 @@ const message2 =
 const message3 =
   "I'm glad to help you! You can read more informations about how to apply for a loan on the link below";
 
-interface IMessageComponent {
+interface IMessageProps {
   text: string;
   createdAt: Date;
   chatBotText: boolean;
   isALink: boolean;
   link: string;
   isAbutton: boolean;
-  conversationsHandler: Function;
+  conversationsHandler?: Function;
 }
 
 export default function Message({
@@ -29,29 +29,33 @@ export default function Message({
   isAbutton,
   link,
   conversationsHandler,
-}: IMessageComponent) {
+}: IMessageProps) {
   const loanChatBotMessges = (
     message: string,
     toggle: boolean,
     optionLink: string
   ) => {
-    conversationsHandler({
-      text: message,
-      createdAt: new Date(),
-      isAChatBotText: true,
-      isALink: toggle,
-      url: optionLink,
-    });
+    if (conversationsHandler) {
+      conversationsHandler({
+        text: message,
+        createdAt: new Date(),
+        isAChatBotText: true,
+        isALink: toggle,
+        url: optionLink,
+      });
+    }
   };
 
   const loanOptionsHandler = () => {
-    conversationsHandler({
-      text,
-      createdAt: new Date(),
-      isAChatBotText: false,
-      isALink: false,
-      url: "",
-    });
+    if (conversationsHandler) {
+      conversationsHandler({
+        text,
+        createdAt: new Date(),
+        isAChatBotText: false,
+        isALink: false,
+        url: "",
+      });
+    }
 
     if (text === "Help") {
       loanChatBotMessges(message1, false, "");
@@ -84,7 +88,7 @@ export default function Message({
     return (
       <div className={clsx(isALink && styles["msg-to-left"])}>
         <div className={clsx(chatBotText && styles["chatbot-msg"])}>
-          <a onClick={() => loanOptionsHandler()} href={link} target="_blank">
+          <a href={link} target="_blank">
             {text}
           </a>
         </div>

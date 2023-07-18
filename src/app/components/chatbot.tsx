@@ -104,7 +104,7 @@ export default function ChatBot() {
       conversationsHandler(nonUserIdMessage);
       setCall2((prev) => prev + 1);
     } else {
-      localStorage.setItem("userId", "322342");
+      localStorage.setItem("userId", "1");
       credentialsListener();
       setUser((prev) => ({
         ...prev,
