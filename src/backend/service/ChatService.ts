@@ -11,7 +11,7 @@ class ChatService {
   public async postChatConversation(chat: IChat) {
     const newConversation = await this.model.create({
       ...chat,
-      createdAt: new Date(),
+      createdAt: new Date()
     });
     return newConversation;
   }

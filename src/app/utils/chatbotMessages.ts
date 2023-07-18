@@ -9,82 +9,81 @@ const initialMessages = {
 const nonUsernameMessage = {
   text: initialMessages.NOT_LOGGED,
   createdAt: new Date(),
-  chatBotText: true,
+  isAChatBotText: true,
   isALink: false,
   isAButton: false,
-  link: "",
+  url: "",
 };
 
 const welcomeMessage = {
   text: initialMessages.WELCOME,
   createdAt: new Date(),
-  chatBotText: true,
+  isAChatBotText: true,
   isALink: false,
   isAButton: false,
-  link: "",
+  url: "",
 };
 
 const nonUserIdMessage = {
   text: initialMessages.NEED_PASSWORD,
   createdAt: new Date(),
-  chatBotText: true,
+  isAChatBotText: true,
   isALink: false,
   isAButton: false,
-
-  link: "",
+  url: "",
 };
 
 const loanMessages: IMessage[] = [
   {
     text: "Sure! Please, choice one of these options:",
     createdAt: new Date(),
-    chatBotText: true,
+    isAChatBotText: true,
     isALink: false,
     isAButton: false,
-    link: "",
+    url: "",
   },
   {
     text: "I want to apply for a loan",
     createdAt: new Date(),
-    chatBotText: true,
+    isAChatBotText: true,
     isALink: false,
     isAButton: true,
-    link: "",
+    url: "",
   },
   {
     text: "Loan conditions",
     createdAt: new Date(),
-    chatBotText: true,
+    isAChatBotText: true,
     isALink: false,
     isAButton: true,
-    link: "",
+    url: "",
   },
   {
     text: "Help",
     createdAt: new Date(),
-    chatBotText: true,
+    isAChatBotText: true,
     isALink: false,
     isAButton: true,
-    link: "",
+    url: "",
   },
 ];
 
 const loginErrorMessage: IMessage = {
   text: "Username or password is incorrect. Try again!",
   createdAt: new Date(),
-  chatBotText: true,
+  isAChatBotText: true,
   isALink: false,
   isAButton: false,
-  link: "",
+  url: "",
 };
 
 const goodByeMessage: IMessage = {
   text: "Goodbye! Have a nice day :)",
   createdAt: new Date(),
-  chatBotText: true,
+  isAChatBotText: true,
   isALink: false,
   isAButton: false,
-  link: "",
+  url: "",
 };
 
 export {

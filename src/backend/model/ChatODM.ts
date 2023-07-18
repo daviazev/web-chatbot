@@ -5,7 +5,10 @@ import AbstractODM from "./AbstractODM";
 const messageSchema = new Schema({
   text: String,
   createdAt: Date,
-  chatBotText: Boolean,
+  isAChatBotText: Boolean,
+  isAButton: Boolean,
+  isALink: Boolean,
+  url: String,
 });
 
 class ChatODM extends AbstractODM<IChat> {

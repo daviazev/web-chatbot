@@ -1,8 +1,8 @@
 export default interface IMessage {
   text: string;
   createdAt: Date;
-  chatBotText: boolean;
+  isAChatBotText: boolean;
   isALink: boolean;
   isAButton: boolean;
-  link: string;
+  url: string;
 }

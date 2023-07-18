@@ -38,9 +38,9 @@ export default function Message({
     conversationsHandler({
       text: message,
       createdAt: new Date(),
-      chatBotText: true,
+      isAChatBotText: true,
       isALink: toggle,
-      link: optionLink,
+      url: optionLink,
     });
   };
 
@@ -48,9 +48,9 @@ export default function Message({
     conversationsHandler({
       text,
       createdAt: new Date(),
-      chatBotText: false,
+      isAChatBotText: false,
       isALink: false,
-      link: "",
+      url: "",
     });
 
     if (text === "Help") {

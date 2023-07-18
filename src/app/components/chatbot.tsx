@@ -27,6 +27,28 @@ export default function ChatBot() {
   }, []);
 
   useEffect(() => {
+    console.log(conversations);
+
+    const finishConversation = async () => {
+      if (
+        conversations.length > 0 && conversations[conversations.length - 1].text === goodByeMessage.text
+      ) {
+        console.log(conversations);
+
+        const { data } = await api.post("api/chat", {
+          userId: localStorage.getItem("userId"),
+          conversation: conversations,
+        });
+
+        console.log(data);
+      }
+
+    };
+  
+    finishConversation()
+  }, [conversations]);
+
+  useEffect(() => {
     const isUsernameDefined = localStorage.getItem("username");
     const isUserIdDefined = localStorage.getItem("userId");
 
@@ -97,10 +119,10 @@ export default function ChatBot() {
     const newMessage: IMessage = {
       text,
       createdAt: new Date(),
-      chatBotText: false,
+      isAChatBotText: false,
       isALink: false,
       isAButton: false,
-      link: "",
+      url: "",
     };
 
     conversationsHandler(newMessage);
@@ -112,11 +134,6 @@ export default function ChatBot() {
     loanMessages.forEach((e) => {
       conversationsHandler(e);
     });
-  };
-
-  const finishConversation = () => {
-    handleDefault();
-    conversationsHandler(goodByeMessage);
   };
 
   const credentialsListener = () => {
@@ -131,7 +148,8 @@ export default function ChatBot() {
     } else if (username && userId && text.toLocaleLowerCase() === "loan") {
       loanHandler();
     } else if (username && userId && text.toLocaleLowerCase() === "goodbye") {
-      finishConversation();
+      handleDefault();
+      conversationsHandler(goodByeMessage);
     } else {
       handleDefault();
     }
@@ -145,16 +163,16 @@ export default function ChatBot() {
         {conversations.length > 0 ? (
           conversations.map(
             (
-              { text, createdAt, chatBotText, isALink, link, isAButton },
+              { text, createdAt, isAChatBotText, isALink, url, isAButton },
               index
             ) => (
               <Message
                 key={index}
                 text={text}
                 createdAt={createdAt}
-                chatBotText={chatBotText}
+                chatBotText={isAChatBotText}
                 isALink={isALink}
-                link={link}
+                link={url}
                 conversationsHandler={conversationsHandler}
                 isAbutton={isAButton}
               />
