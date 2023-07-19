@@ -69,7 +69,7 @@ export default function ChatBot() {
 
       setFirstCall(false);
     }
-  }, [localStorage.getItem("username"), localStorage.getItem("userId")]);
+  }, [user]);
 
   const handlerMessage = (text: string) => setText(text);
 
