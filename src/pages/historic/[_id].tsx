@@ -29,10 +29,10 @@ function MessagesPage() {
           <div key={_id}>
             <h2>conversation user #{localStorage.getItem("username")}</h2>
             <h3>{formatDate(createdAt)}</h3>
-            {conversation.map(({ _id, text, createdAt, isAChatBotText }) => (
-              <div className={styles["msgs-history"]}>
+            {conversation.map(({ _id, text, createdAt, isAChatBotText }, index) => (
+              <div key={_id} className={styles["msgs-history"]}>
                 <Message
-                  key={_id}
+                  key={index}
                   createdAt={new Date(createdAt)}
                   text={text}
                   isALink={false}
