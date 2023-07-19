@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import api from "@/axios/config";
 import styles from "./register.module.css";
 import Navbar from "@/app/components/Navbar";
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function UserRegistration() {
   const [username, setUsername] = useState("");
@@ -38,7 +41,7 @@ export default function UserRegistration() {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${inter.className}`}>
       <div className={styles["resgiter-section"]}>
         <Navbar />
         <h2>User register</h2>

@@ -3,6 +3,9 @@ import React from "react";
 import styles from "./message.module.css";
 import formatDateToString from "@/app/utils/formatDate";
 import clsx from "clsx";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const message1 =
   "I'm glad to help you! You can read more informations about how to make a loan on the link below";
@@ -98,7 +101,9 @@ export default function Message({
 
   return (
     <div
-      className={chatBotText ? styles["msg-to-left"] : styles["msg-to-right"]}
+      className={`${
+        chatBotText ? styles["msg-to-left"] : styles["msg-to-right"]
+      } ${inter.className}`}
     >
       <div className={chatBotText ? styles["chatbot-msg"] : styles["user-msg"]}>
         <span>{text}</span>

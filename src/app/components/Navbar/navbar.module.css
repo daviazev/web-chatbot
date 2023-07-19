@@ -6,6 +6,7 @@
 .navbar-item {
   padding: 14px;
   color: black;
+  text-decoration: none;
 }
 
 .navbar-item:hover {

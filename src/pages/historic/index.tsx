@@ -5,6 +5,9 @@ import styles from "./historic.module.css";
 import { formatDate } from "@/app/utils/formatDate";
 import IMessageData from "@/app/interfaces/databaseMessages";
 import Navbar from "@/app/components/Navbar";
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Historic() {
   const [conversations, setConversations] = useState<IMessageData[]>([]);
@@ -22,7 +25,7 @@ export default function Historic() {
   }, []);
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${inter.className}`}>
       <Navbar />
       <h1>Histórico de conversas</h1>
       <div className={styles["chat-wrapper"]}>
