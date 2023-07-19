@@ -22,7 +22,7 @@ function MessagesPage() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.teste}>
       <Navbar />
       {conversations.length > 0 &&
         conversations.map(({ createdAt, conversation, _id }) => (

@@ -12,6 +12,7 @@ export default function UserRegistration() {
   const [password, setPassword] = useState("");
   const [userAlreadyExists, setUserAlreadyExists] = useState(false);
   const [internalError, setInternalError] = useState(false);
+  const [success, setSuccess] = useState(false)
 
   const handleUsernameChange = (value: string) => {
     setUsername(value);
@@ -26,6 +27,7 @@ export default function UserRegistration() {
 
     try {
       await api.post("api/register", { username, password });
+      setSuccess(true)
     } catch (error) {
       console.log(error);
       if (
@@ -83,6 +85,7 @@ export default function UserRegistration() {
             Sorry, a internal error has occurred! Roload the page and try again.{" "}
           </div>
         )}
+        {success && (<div>successfully registered</div>)}
       </div>
     </div>
   );
