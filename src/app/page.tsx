@@ -5,8 +5,10 @@ import Navbar from "./components/Navbar";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Navbar />
-      <ChatBot />
+      <div className={styles.wrapper}>
+        <Navbar />
+        <ChatBot />
+      </div>
     </main>
   );
 }
