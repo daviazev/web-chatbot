@@ -33,6 +33,7 @@ export default function Historic() {
           conversations.map(({ createdAt, _id }) => (
             <div className={styles["historic-links-wrapper"]}>
               <Link
+              key={_id}
                 className={styles["historic-link"]}
                 href={`historic/${_id}`}
               >

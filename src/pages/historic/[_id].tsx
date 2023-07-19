@@ -25,8 +25,8 @@ function MessagesPage() {
     <div>
       <Navbar />
       {conversations.length > 0 &&
-        conversations.map(({ createdAt, conversation }) => (
-          <div>
+        conversations.map(({ createdAt, conversation, _id }) => (
+          <div key={_id}>
             <h2>conversation user #{localStorage.getItem("username")}</h2>
             <h3>{formatDate(createdAt)}</h3>
             {conversation.map(({ _id, text, createdAt, isAChatBotText }) => (
