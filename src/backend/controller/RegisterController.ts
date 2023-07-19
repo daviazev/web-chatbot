@@ -28,6 +28,7 @@ class RegisterController {
         .status(HttpStatus.CONFLIT)
         .json({ message: ErrorMessages.USER_ALREADY_EXISTS });
     } catch (error) {
+      console.log(error);
       return this.res
         .status(HttpStatus.INTERNAL_ERROR)
         .json({ message: ErrorMessages.INTERNAL_ERROR });
