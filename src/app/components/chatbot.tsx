@@ -29,21 +29,15 @@ export default function ChatBot() {
   }, []);
 
   useEffect(() => {
-    console.log(conversations);
-
     const finishConversation = async () => {
       if (
         conversations.length > 0 &&
         conversations[conversations.length - 1].text === goodByeMessage.text
       ) {
-        console.log(conversations);
-
-        const { data } = await api.post("api/chat", {
+        await api.post("api/chat", {
           userId: localStorage.getItem("userId"),
           conversation: conversations,
         });
-
-        console.log(data);
       }
     };
 

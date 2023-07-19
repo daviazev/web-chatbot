@@ -17,7 +17,6 @@ export default function Historic() {
     const userId = localStorage.getItem("userId");
     const getHistoric = async () => {
       const { data } = await api.get(`api/${userId}`);
-      console.log(data);
       setConversations(data.response);
       localStorage.setItem("conversations", JSON.stringify(data.response));
     };

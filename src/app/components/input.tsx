@@ -33,20 +33,3 @@ export default function Input({
     </>
   );
 }
-
-
-//   const [placeholder, setPlaceholder] = useState("");
-
-//   useEffect(() => {
-//     if (!username) {
-//       setPlaceholder("type your username")
-//       console.log("aaaaa");
-      
-//     }
-
-//     if (!userId) {
-//       setPlaceholder("type your username")
-//       console.log("aaaaa");
-
-//     }
-//   }, [username, userId])
