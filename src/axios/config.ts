@@ -1,5 +1,5 @@
 import axios from "axios"
 
-const api = axios.create({ baseURL: "https://web-chatbot.vercel.ap" });
+const api = axios.create({ baseURL: "/" });
 
 export default api;
