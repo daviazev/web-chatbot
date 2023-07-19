@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome!
 
-## Getting Started
+This is a project created for the junior full-stack developer position application at [Lexart Labs](https://lexartlabs.com/). The goal was to build a chatbot capable of understanding words like "Hello," "Loan," and "Goodbye," and respond to gratitude with "Thanks."
 
-First, run the development server:
+## How the App Works
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Possible Backend Routes:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `api/register`: Allows users to register by providing a username and password.
+- `api/login`: Handles user login functionality.
+- `api/chat`: Posts new conversations to the chat history.
+- `api/[userId]`: A GET route to retrieve the user's conversations.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Possible Frontend Routes:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `/`: The main route containing the chatbot and its logic, located in the `src/app/chatbot.tsx` file.
+- `/historic`: A route displaying the user's chatbot conversation history.
+- `/register`: Allows users to register by providing a username and password.
 
-## Learn More
+## Technologies and Tools Used in the App
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js
+- MongoDB
+- Mongoose
+- Bcrypt.js
+- Dotenv
+- TypeScript
+- clsx
+- Axios
