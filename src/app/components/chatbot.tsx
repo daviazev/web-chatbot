@@ -8,6 +8,8 @@ import {
   loanMessages,
   loginErrorMessage,
   goodByeMessage,
+  goodByeMessages,
+  youAreWelcomeMessage,
 } from "@/app/utils/chatbotMessages";
 import IMessage from "@/app/interfaces/message";
 import Message from "./Message";
@@ -138,16 +140,25 @@ export default function ChatBot() {
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId");
 
+    const loan = text.toLocaleLowerCase().includes("loan");
+    const goodbye = text.toLocaleLowerCase().includes("goodbye");
+    const thanks = text.toLocaleLowerCase().includes("thanks");
+
     if (!username) {
       handleDefault();
       handlerUsername();
     } else if (!userId) {
       handlerUserId();
-    } else if (username && userId && text.toLocaleLowerCase() === "loan") {
+    } else if (username && userId && loan) {
       loanHandler();
-    } else if (username && userId && text.toLocaleLowerCase() === "goodbye") {
+    } else if (username && userId && goodbye) {
       handleDefault();
-      conversationsHandler(goodByeMessage);
+      goodByeMessages.forEach((msg) => {
+        conversationsHandler(msg);
+      });
+    } else if (thanks) {
+      handleDefault();
+      conversationsHandler(youAreWelcomeMessage);
     } else {
       handleDefault();
     }

@@ -4,15 +4,15 @@ import styles from "./message.module.css";
 import formatDateToString from "@/app/utils/formatDate";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
+import {
+  goodByeMessage,
+  helpMessage,
+  loanConditionsMessage,
+  applyForALoanMessage,
+  jokeMessage,
+} from "@/app/utils/chatbotMessages";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const message1 =
-  "I'm glad to help you! You can read more informations about how to make a loan on the link below";
-const message2 =
-  "I'm glad to help you! You can read more informations about loan conditions on the link below";
-const message3 =
-  "I'm glad to help you! You can read more informations about how to apply for a loan on the link below";
 
 interface IMessageProps {
   text: string;
@@ -61,13 +61,18 @@ export default function Message({
     }
 
     if (text === "Help") {
-      loanChatBotMessges(message1, false, "");
+      loanChatBotMessges(helpMessage, false, "");
       loanChatBotMessges("How to make a loan", true, "google.com");
     } else if (text === "Loan Conditions") {
-      loanChatBotMessges(message2, false, "");
+      loanChatBotMessges(loanConditionsMessage, false, "");
       loanChatBotMessges("How to make a loan", true, "google.com");
+    } else if (text === "YES") {
+      loanChatBotMessges(jokeMessage, false, "");
+      loanChatBotMessges(goodByeMessage.text, false, "");
+    } else if (text === "No, I'm fine, thanks!") {
+      loanChatBotMessges(goodByeMessage.text, false, "");
     } else {
-      loanChatBotMessges(message3, false, "");
+      loanChatBotMessges(applyForALoanMessage, false, "");
       loanChatBotMessges("How to make a loan", true, "google.com");
     }
   };

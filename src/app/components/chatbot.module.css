@@ -24,10 +24,11 @@
 
 .send-btn {
   border-radius: 16px;
-  background-color: blue;
+  background-color: #0085ff;
   width: 20%;
   border: none;
   color: white;
+  cursor: pointer;
 }
 
 .chat-wrapper {

@@ -86,6 +86,51 @@ const goodByeMessage: IMessage = {
   url: "",
 };
 
+const goodByeMessages: IMessage[] = [
+  {
+    text: "Do you need anything else?",
+    createdAt: new Date(),
+    isAChatBotText: true,
+    isALink: false,
+    isAButton: false,
+    url: "",
+  },
+  {
+    text: "Yes",
+    createdAt: new Date(),
+    isAChatBotText: true,
+    isALink: false,
+    isAButton: true,
+    url: "",
+  },
+  {
+    text: "No, I'm fine, thanks!",
+    createdAt: new Date(),
+    isAChatBotText: true,
+    isALink: false,
+    isAButton: true,
+    url: "",
+  },
+];
+
+const youAreWelcomeMessage: IMessage = {
+  text: "You're welcome!",
+  createdAt: new Date(),
+  isAChatBotText: true,
+  isALink: false,
+  isAButton: false,
+  url: "",
+};
+
+const helpMessage =
+  "I'm glad to help you! You can read more informations about how to make a loan on the link below";
+const loanConditionsMessage =
+  "I'm glad to help you! You can read more informations about loan conditions on the link below";
+const applyForALoanMessage =
+  "I'm glad to help you! You can read more informations about how to apply for a loan on the link below";
+const jokeMessage =
+  "Sorry, I was joking. That's all I was made to do. But I'm willing to grow if you want too :D";
+
 export {
   nonUsernameMessage,
   nonUserIdMessage,
@@ -93,4 +138,10 @@ export {
   loanMessages,
   loginErrorMessage,
   goodByeMessage,
+  goodByeMessages,
+  helpMessage,
+  loanConditionsMessage,
+  applyForALoanMessage,
+  jokeMessage,
+  youAreWelcomeMessage,
 };
