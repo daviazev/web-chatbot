@@ -27,6 +27,7 @@ export default function UserRegistration() {
     try {
       await api.post("api/register", { username, password });
     } catch (error) {
+      console.log(error);
       if (
         (error as { response: { status: number } }).response?.status === 409
       ) {
