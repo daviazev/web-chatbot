@@ -5,9 +5,10 @@ import styles from "./historic.module.css";
 import { formatDate } from "@/app/utils/formatDate";
 import IMessageData from "@/app/interfaces/databaseMessages";
 import Navbar from "@/app/components/Navbar";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Historic() {
   const [conversations, setConversations] = useState<IMessageData[]>([]);
@@ -32,10 +33,13 @@ export default function Historic() {
         {conversations.length > 0 &&
           conversations.map(({ createdAt, _id }) => (
             <div className={styles["historic-links-wrapper"]}>
-              <a className={styles["historic-link"]} href={`historic/${_id}`}>
+              <Link
+                className={styles["historic-link"]}
+                href={`historic/${_id}`}
+              >
                 conversation user #{localStorage.getItem("username")} -{" "}
                 {formatDate(createdAt)}
-              </a>
+              </Link>
             </div>
           ))}
       </div>

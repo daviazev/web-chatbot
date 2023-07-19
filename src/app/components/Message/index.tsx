@@ -10,7 +10,11 @@ import {
   loanConditionsMessage,
   applyForALoanMessage,
   jokeMessage,
+  helpLoanLink,
+  loanConditionsLink,
+  wantALoanLink,
 } from "@/app/utils/chatbotMessages";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,18 +66,18 @@ export default function Message({
 
     if (text === "Help") {
       loanChatBotMessges(helpMessage, false, "");
-      loanChatBotMessges("How to make a loan", true, "google.com");
+      loanChatBotMessges("Help with loan", true, helpLoanLink);
     } else if (text === "Loan Conditions") {
       loanChatBotMessges(loanConditionsMessage, false, "");
-      loanChatBotMessges("How to make a loan", true, "google.com");
-    } else if (text === "YES") {
+      loanChatBotMessges("About loan conditions", true, loanConditionsLink);
+    } else if (text === "Yes") {
       loanChatBotMessges(jokeMessage, false, "");
       loanChatBotMessges(goodByeMessage.text, false, "");
     } else if (text === "No, I'm fine, thanks!") {
       loanChatBotMessges(goodByeMessage.text, false, "");
     } else {
       loanChatBotMessges(applyForALoanMessage, false, "");
-      loanChatBotMessges("How to make a loan", true, "google.com");
+      loanChatBotMessges("Take a loan", true, wantALoanLink);
     }
   };
 
@@ -96,9 +100,9 @@ export default function Message({
     return (
       <div className={clsx(isALink && styles["msg-to-left"])}>
         <div className={clsx(chatBotText && styles["chatbot-msg"])}>
-          <a href={link} target="_blank">
+          <Link href={link} target="_blank">
             {text}
-          </a>
+          </Link>
         </div>
       </div>
     );

@@ -131,6 +131,12 @@ const applyForALoanMessage =
 const jokeMessage =
   "Sorry, I was joking. That's all I was made to do. But I'm willing to grow if you want too :D";
 
+const helpLoanLink =
+  "https://www.serasa.com.br/credito/blog/emprestimo-o-que-e-como-fazer/";
+const loanConditionsLink =
+  "https://www.bb.com.br/site/pra-voce/emprestimo/emprestimo-pessoal/";
+const wantALoanLink = "https://www.serasa.com.br/ecred/emprestimo-pessoal/";
+
 export {
   nonUsernameMessage,
   nonUserIdMessage,
@@ -144,4 +150,7 @@ export {
   applyForALoanMessage,
   jokeMessage,
   youAreWelcomeMessage,
+  helpLoanLink,
+  loanConditionsLink,
+  wantALoanLink,
 };
