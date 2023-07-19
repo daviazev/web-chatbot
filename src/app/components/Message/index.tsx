@@ -83,7 +83,7 @@ export default function Message({
 
   if (isAbutton) {
     return (
-      <div className={clsx(isALink && styles["msg-to-left"])}>
+      <div className={styles["msg-to-left"]}>
         <div>
           <button
             className={styles["btn-option"]}

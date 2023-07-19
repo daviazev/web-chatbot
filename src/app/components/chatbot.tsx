@@ -23,10 +23,16 @@ export default function ChatBot() {
   const [isPassword, setisPassword] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
   const [firstCall, setFirstCall] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     localStorage.clear();
   }, []);
+
+  useEffect(() => {
+    if (text.length > 0) setIsButtonDisabled(false)
+    else setIsButtonDisabled(true)
+  }, [text])
 
   useEffect(() => {
     const finishConversation = async () => {
@@ -71,7 +77,9 @@ export default function ChatBot() {
     }
   }, [user]);
 
-  const handlerMessage = (text: string) => setText(text);
+  const handlerMessage = (text: string) => {
+    setText(text);
+  };
 
   const conversationsHandler = (message: IMessage) => {
     setConversations((prevConversations) => [...prevConversations, message]);
@@ -195,7 +203,10 @@ export default function ChatBot() {
         />
         <button
           onClick={() => credentialsListener()}
-          className={styles["send-btn"]}
+          className={
+            isButtonDisabled ? styles["disabled-button"] : styles["send-btn"]
+          }
+          disabled={isButtonDisabled}
         >
           SEND
         </button>

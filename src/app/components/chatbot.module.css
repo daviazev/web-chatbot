@@ -32,6 +32,15 @@
   cursor: pointer;
 }
 
+.disabled-button {
+  border-radius: 16px;
+  background-color: #eaeaea;
+  width: 20%;
+  border: none;
+  color: white;
+  cursor: not-allowed;
+}
+
 .chat-wrapper {
   position: relative;
   display: flex;
