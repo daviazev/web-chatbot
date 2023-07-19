@@ -9,3 +9,17 @@
   display: flex;
   flex-direction: column;
 }
+
+.historic-links-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.historic-link {
+  padding: 8px;
+}
+
+.historic-link:hover {
+  background-color: gray;
+  color: white;
+}

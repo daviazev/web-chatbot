@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./message.module.css";
-import formatDate from "@/app/utils/formatDate";
+import formatDateToString from "@/app/utils/formatDate";
 import clsx from "clsx";
 
 const message1 =
@@ -102,7 +102,9 @@ export default function Message({
     >
       <div className={chatBotText ? styles["chatbot-msg"] : styles["user-msg"]}>
         <span>{text}</span>
-        <span className={styles["msg-time"]}>{formatDate(createdAt)}</span>
+        <span className={styles["msg-time"]}>
+          {formatDateToString(createdAt)}
+        </span>
       </div>
     </div>
   );
