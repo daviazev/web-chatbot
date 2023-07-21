@@ -13,7 +13,7 @@ This is a project created for the junior full-stack developer position applicati
 
 ### Possible Frontend Routes:
 
-- `/`: The main route containing the chatbot and its logic, located in the `src/app/chatbot.tsx` file.
+- `/`: The main route containing the chatbot and its logic, located in the `src/app/components/chatbot.tsx` file.
 - `/historic`: A route displaying the user's chatbot conversation history.
 - `/register`: Allows users to register by providing a username and password.
 
